@@ -18,7 +18,20 @@ public class UserRepository {
     }
 
     public boolean checkLogin(final String login, final String password) {
-        // TODO: Prosze dokonczyc implementacje...
+        for(int i=0;i< usersDatabase.size();i++){
+            if(usersDatabase.get(i).getLogin().equals(login)){
+                if(usersDatabase.get(i).getPassword().equals(password)){
+                    return true;
+                }
+                else{
+                    usersDatabase.get(i).getIncorrectLoginCounter()++;
+                    if(usersDatabase.get(i).getIncorrectLoginCounter()==3){
+                        usersDatabase.get(i).isActive()=false;
+                        return false;
+                    }
+                }
+            }
+        }
 
         return false;
     }
